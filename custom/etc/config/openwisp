@@ -1,0 +1,8 @@
+config controller 'http'
+        option url 'https://openwisp.nnxx.ninux.org'
+        list unmanaged 'system.@led'
+        list unmanaged 'network.loopback'
+        list unmanaged 'network.@switch'
+        list unmanaged 'network.@switch_vlan'
+        shared_secret 'Secretn1nuxB4s'
+        option verify_ssl '1'
