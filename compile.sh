@@ -1,7 +1,7 @@
 #/bin/bash -x
 compile=`pwd`
-version='custom/config-base'
-#version='custom/config-nodogspash'
+#version='custom/config-base'
+version='custom/config-nodogspash'
 
 
 if [ -d source ]; then
@@ -24,8 +24,7 @@ cp $compile/custom/etc/uci-defaults/* $compile/source/package/base-files/files/e
 cd $compile/source
 ./scripts/feeds update -a && ./scripts/feeds install -a && \
 cat $compile/$version > $compile/source/.config && \
-exit 0
-make V=s -j 5 && \
+make V=s -j 5 >&1 | tee build.log | egrep -i '(warn|error)'  && \
 mv $compile/source/bin/targets/sunxi/generic/*.img.gz $compile/Firmware/ && \
 mv $compile/source/bin/targets/sunxi/generic/config.seed $compile/Firmware/
 
